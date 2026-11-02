@@ -1,6 +1,18 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>偷偷摸摸辦公室｜3D 看板</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#141319">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="辦公室">
+<meta name="application-name" content="辦公室">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>/* PWA：只在 https／localhost 註冊，本機檔案（file://）安靜略過 */
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) { addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }</script>
 <style>
 *{box-sizing:border-box}html,body{margin:0;background:#141319;color:#f3ead8;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
 header{position:sticky;top:0;z-index:30;background:linear-gradient(#1d1a14,#17151a);border-bottom:1px solid #4a3b22;padding:8px 12px 8px}
