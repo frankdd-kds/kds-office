@@ -1,5 +1,5 @@
 // 偷偷摸摸辦公室 PWA：頁面走「先網路、失敗才用快取」，每小時更新一上線就看得到
-const CACHE = "kds-office-v1";
+const CACHE = "kds-office-v2";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).catch(() => {}).then(() => self.skipWaiting()));
@@ -26,4 +26,10 @@ self.addEventListener("fetch", (e) => {
       return hit || net;
     })
   );
+});
+// 頁面按 🔄 時：抓最新 index.html 放進快取，回報完成
+self.addEventListener("message", (e) => {
+  if (!e.data || e.data.type !== "refresh") return;
+  const done = () => { try { e.ports[0] && e.ports[0].postMessage("ok"); } catch (x) {} };
+  e.waitUntil(fetch("./index.html?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? caches.open(CACHE).then((c) => c.put("./index.html", r)) : 0).catch(() => {}).then(done));
 });
